@@ -24,8 +24,6 @@
       </div>
     </div>
 
-  
-
 
     <div class="container-fluid">
       <div class="row">
@@ -37,11 +35,6 @@
         <div class="col-lg-3 col-xs-0"></div>
       </div>
     </div>
-    <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
-    <!-- <HelloWorld msg="Welcome to Your Vue.js App"/>
-     -->
-     <!-- <h1>Ola Lista</h1> -->
-      <!-- <lista-buscar></lista-buscar> -->
      <DataTable></DataTable>
   </div>
 </template>
