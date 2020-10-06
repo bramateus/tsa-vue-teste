@@ -14,9 +14,6 @@ export default new Vuex.Store({
     mutations: {
         UPDATE_LISTA(state, payload){
             state.usuario.usu_array.push(payload);
-            // state.usuario.usu_array.push(payload.email);
-            // state.usuario.usu_array.push(payload.cpf);
-            // state.usuario.usu_array.push(payload.created_at);
         }
     },
     actions: {}

@@ -38,17 +38,6 @@
             <div class="col-lg-3 col-xs-0"></div>
             <div class="col-lg-6 col-xs-12">
               <span>CPF*</span><br />
-
-
-
-              <!-- <ul>
-                <li v-for="user in users" :key="user.id">
-                  {{ user.name }}
-                </li>
-              </ul> -->
-              <!-- <the-mask :mask="['###.###.###-##', '##.###.###/####-##']" /> -->
-              <!-- <input type="text" v-mask-tel="telefone" v-model="telefone" /> {{telefone}} -->
-
               <input type="text" name="CPF" v-mask="'###.###.###-##'" placeholder="111.111.111-01" v-model="cpf" class="input-style"
               />
             </div>
@@ -59,15 +48,12 @@
             <div class="col-lg-3 col-xs-0"></div>
             <div class="col-lg-3">
               <br />
-              <span>Endereço</span><br />
-              <input type="text" name="endereco" v-model="endereco" placeholder="Rua, Número e Bairro" class="input-style"/>
+              <span>CEP</span><br />
+              <input name="cep" v-model="cep" class="input-style" @keyup="fetchApi" maxlength="10" v-mask="'##.###-###'" />
             </div>
-
-
             <div class="col-lg-3">
               <br />
               <span>Estado</span><br />
-              <!-- <input type="text" v-model="estado" class="input-style" /> -->
               <select name="select-estado" id="select-estado" class="input-style" v-model="estado">
                 <option value=""></option>
               </select>
@@ -77,21 +63,15 @@
 
           <div class="row">
             <div class="col-lg-3 col-xs-0"></div>
-            <div class="col-lg-3">
+            <div class="col-lg-4">
               <br />
-              <span>CEP</span><br />
-              <input
-                name="cep" v-model="cep" class="input-style" @keyup="fetchApi" maxlength="10" v-mask="'##.###-###'" />
+              <span>Endereço</span><br />
+              <input type="text" name="endereco" v-model="endereco" placeholder="Rua, Número e Bairro" class="input-style"/>
             </div>
-            <div class="col-lg-3">
+            <div class="col-lg-2">
               <br />
               <span>Cidade</span><br />
-              <input
-                type="text"
-                name="estado"
-                v-model="cidade"
-                class="input-style"
-              />
+              <input type="text" name="estado" v-model="cidade" class="input-style"/>
             </div>
             <div class="col-lg-3 col-xs-0"></div>
           </div>
@@ -100,8 +80,7 @@
             <div class="col-lg-3 col-xs-0"></div>
             <div class="col-lg-6">
               <br />
-              <span style="color: royalblue; font-weight: bolder"
-                >Forma de Pagamento</span
+              <span style="color: royalblue; font-weight: bolder">Forma de Pagamento</span
               ><br />
               <hr />
             </div>
@@ -111,22 +90,12 @@
           <div class="row">
             <div class="col-lg-3 col-xs-0"></div>
             <div class="col-lg-2">
-              <input
-                type="radio"
-                id="one"
-                value="Cartão de Crédito"
-                v-model="picked"
-              />
+              <input type="radio" id="one" value="Cartão de Crédito" v-model="picked"/>
               <label for="one" style="cursor: pointer">Cartão de Crédito</label>
               <br />
             </div>
             <div class="col-lg-2">
-              <input
-                type="radio"
-                id="two"
-                value="Boleto Bancário"
-                v-model="picked"
-              />
+              <input type="radio" id="two" value="Boleto Bancário" v-model="picked"/>
               <label for="two" style="cursor: pointer">Boleto Bancário</label>
               <br />
             </div>
@@ -138,34 +107,16 @@
             <div class="col-lg-3 col-xs-12">
               <span>Nome no cartão</span><br />
               <input
-                type="text"
-                name="nome-cartao"
-                v-model="nome_cartao"
-                placeholder="Nome impresso no cartão"
-                class="input-style"
-              />
+                type="text" name="nome-cartao" v-model="nome_cartao" placeholder="Nome impresso no cartão" class="input-style"/>
             </div>
 
             <div class="col-lg-2 col-xs-12">
               <span>Data de Expiração</span><br />
-              <input v-mask="'##'"
-                type="number"
-                name="nome"
-                placeholder="Mês"
-                class="input-style"
-                min="01"
-                max="12"
-              />
+              <input v-mask="'##'" type="number" name="nome" placeholder="Mês" class="input-style"    min="01" max="12"/>
             </div>
             <div class="col-lg-1 col-xs-12">
               <br />
-              <input
-                type="text"
-                name="nome"
-                placeholder="Ano"
-                class="input-style"
-                v-mask="'####'"
-              />
+              <input type="text" name="nome" placeholder="Ano" class="input-style" v-mask="'####'"/>
             </div>
             <div class="col-lg-3 col-xs-0"></div>
           </div>
@@ -175,13 +126,7 @@
             <div class="col-lg-3">
               <br />
               <span>Número do Cartão</span><br />
-              <input
-                type="text"
-                name="cep"
-                placeholder="5555 5555 5555 5555"
-                class="input-style"
-                v-mask="'#### #### #### ####'"
-              />
+              <input type="text" name="cep" placeholder="5555 5555 5555 5555" class="input-style"  v-mask="'#### #### #### ####'"/>
             </div>
             <div class="col-lg-3">
               <br />
@@ -237,6 +182,7 @@
     width: 100%;
     padding: 12px 12px;
     border-bottom: 2px solid gainsboro;
+    cursor: pointer;
   }
 
   ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
@@ -322,6 +268,7 @@ export default {
         cep: "",
         estado: "",
         cidade: "",
+        cor: "",
         nome_cartao: "",
         datas: []
       }
@@ -342,6 +289,11 @@ export default {
         send() {
 
           if(this.nome != '' && this.email != '' && this.cpf !== '') {
+
+            // if(this.cpf.length !== 14) {
+            //   this.$swal("Ops!", "Campo CPF não verificado.","warning");
+            // }
+            // console.log(this.cpf.length);
 
             this.$store.commit("UPDATE_LISTA", {
             "nome"       : this.nome, 
@@ -382,8 +334,9 @@ export default {
                 .then((t) => t.json())
                 .then((t) => {
                     if (t.uf != null || t.localidade != null) {
-                        this.estado = t.uf;
-                        this.cidade = t.localidade
+                        this.estado   = t.uf;
+                        this.cidade   = t.localidade;
+                        this.endereco = t.logradouro
                     }
                 });
             }
